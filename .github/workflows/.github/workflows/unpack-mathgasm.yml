@@ -1,0 +1,31 @@
+name: Unpack MATHGASM.zip
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unzip:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Unzip scaffold
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip rsync
+          unzip -o MATHGASM.zip
+          # Zip contains a folder named GHOSTMATH/ (scaffold root)
+          rsync -a GHOSTMATH/ ./
+          rm -rf GHOSTMATH
+
+      - name: Commit unpacked files
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Unpack MathGasm scaffold" || echo "No changes to commit"
+          git push
