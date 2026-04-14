@@ -1,0 +1,10 @@
+{
+  "description": "Provider-agnostic AI art pipeline \u2014 math texture synthesis, prompt compiler, and provider adapters for generative art",
+  "files": [
+    "README.md",
+    "core/math_modules/noiseField.ts",
+    "core/prompt_compiler/compilePrompt.ts",
+    "core/types.ts",
+    "providers/nano_banana.ts"
+  ]
+}
